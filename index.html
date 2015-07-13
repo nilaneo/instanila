@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Instanila</title>
+
+        <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div ng-app="instanila">
+            <div ng-controller="HashtagGroupsController">
+              <ul>
+                <li ng-repeat="hashtagGroup in hashtagGroups">
+                  {{hashtagGroup.name}}: {{hashtagGroup.hashtags}}
+                </li>
+              </ul>
+            </div>
+        </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
+        <script src="instanila.js"></script>
+    </body>
+</html>
