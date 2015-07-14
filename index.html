@@ -19,6 +19,26 @@
                   {{hashtagGroup.name}}: {{hashtagGroup.hashtags}}
                 </li>
               </ul>
+              <h3>
+                  C'mon, add some new hashtag group!
+              </h3>
+              <form ng-submit="addHashtagGroup()">
+                <div>
+                    <label for="hashtag-group-name">Name</label>
+                </div>
+                <div>
+                    <input type="text" name="hashtag-group-name" ng-model="newHashtagGroup.name">
+                </div>
+                <div>
+                    <label for="hashtag-group-list">Hashtags</label>
+                </div>
+                <div>
+                    <textarea type="text" name="hashtag-group-list" ng-model="newHashtagGroup.hashtags"></textarea>
+                </div>
+                <div>
+                    <button type="submit">Add</button>
+                </div>
+              </form>
             </div>
         </div>
 
