@@ -13,8 +13,12 @@
 	 	$scope.newHashtagGroup = {name: '', hashtags: ''};
 
 	 	$scope.addHashtagGroup = function() {
-	 		$scope.hashtagGroups.push($scope.newHashtagGroup);
-	 		$scope.newHashtagGroup = {name: '', hashtags: ''};
+	 		if($scope.addHashtagGroupForm.$valid) {
+		 		$scope.hashtagGroups.push($scope.newHashtagGroup);
+		 		$scope.newHashtagGroup = {name: '', hashtags: ''};
+	 		} else {
+	 			window.alert('Name and Hashtags are required fields');
+	 		}
 	 	};
 	});
 })();

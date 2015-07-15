@@ -22,18 +22,18 @@
               <h3>
                   C'mon, add some new hashtag group!
               </h3>
-              <form ng-submit="addHashtagGroup()">
+              <form ng-submit="addHashtagGroup()" name="addHashtagGroupForm" novalidate>
                 <div>
                     <label for="hashtag-group-name">Name</label>
                 </div>
                 <div>
-                    <input type="text" name="hashtag-group-name" ng-model="newHashtagGroup.name">
+                    <input type="text" name="hashtagGroupName" ng-model="newHashtagGroup.name" required>
                 </div>
                 <div>
                     <label for="hashtag-group-list">Hashtags</label>
                 </div>
                 <div>
-                    <textarea type="text" name="hashtag-group-list" ng-model="newHashtagGroup.hashtags"></textarea>
+                    <textarea type="text" name="hashtagGroupList" ng-model="newHashtagGroup.hashtags" required></textarea>
                 </div>
                 <div>
                     <button type="submit">Add</button>
