@@ -15,12 +15,23 @@
 			},
 			addNew: function(hashtagGroup) {
 				hashtagGroups.push(hashtagGroup);
+			},
+			deleteGroup: function(hashtagGroup) {
+				var index = hashtagGroups.indexOf(hashtagGroup);
+				if(index !== -1) {
+					hashtagGroups.splice(index, 1);
+				}
 			}
 		};
 	}]);
 
 	instanilaModule.controller('ListHashtagGroupsController', ['$scope', 'hashtagGroupsService', function($scope, hashtagGroupsService) {	
 	 	$scope.hashtagGroups = hashtagGroupsService.getAll();
+	 	$scope.deleteHashtagGroup = function(hashtagGroup) {
+	 		if (window.confirm('Do you really want to delete this hashtag group?')) {
+	 			hashtagGroupsService.deleteGroup(hashtagGroup);
+	 		}
+	 	};
 	}]);
 
 	instanilaModule.controller('AddHashtagGroupController', ['$scope', 'hashtagGroupsService', function($scope, hashtagGroupsService) {
