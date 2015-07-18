@@ -19,12 +19,14 @@
     </head>
     <body>
         <div ng-app="instanila" ng-cloak>
-            <div ng-controller="HashtagGroupsController">
+            <div ng-controller="ListHashtagGroupsController">
               <ul>
                 <li ng-repeat="hashtagGroup in hashtagGroups">
                   {{hashtagGroup.name}}: {{hashtagGroup.hashtags}}
                 </li>
               </ul>
+          </div>
+          <div ng-controller="AddHashtagGroupController">
               <h3>
                   C'mon, add some new hashtag group!
               </h3>
