@@ -19,41 +19,12 @@
     </head>
     <body>
         <div ng-app="instanila" ng-cloak>
-            <div ng-controller="ListHashtagGroupsController">
-              <ul>
-                <li ng-repeat="hashtagGroup in hashtagGroups">
-                  {{hashtagGroup.name}}: {{hashtagGroup.hashtags}}
-                  <button type="button" ng-click="deleteHashtagGroup(hashtagGroup)">
-                      Delete
-                  </button>
-                </li>
-              </ul>
-          </div>
-          <div ng-controller="AddHashtagGroupController">
-              <h3>
-                  C'mon, add some new hashtag group!
-              </h3>
-              <form ng-submit="addHashtagGroup()" name="addHashtagGroupForm" novalidate>
-                <div>
-                    <label for="hashtag-group-name">Name</label>
-                </div>
-                <div>
-                    <input type="text" name="hashtagGroupName" ng-model="newHashtagGroup.name" required>
-                </div>
-                <div>
-                    <label for="hashtag-group-list">Hashtags</label>
-                </div>
-                <div>
-                    <textarea type="text" name="hashtagGroupList" ng-model="newHashtagGroup.hashtags" required></textarea>
-                </div>
-                <div>
-                    <button type="submit">Add</button>
-                </div>
-              </form>
-            </div>
+          <h1>Instanila</h1>
+          <ng-view></ng-view>
         </div>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.min.js"></script>
         <script src="instanila.js"></script>
     </body>
 </html>

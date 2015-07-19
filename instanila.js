@@ -1,7 +1,24 @@
 (function() {
 	'use strict';
 
-	var instanilaModule = angular.module('instanila', []);
+	var instanilaModule = angular.module('instanila', [
+			'ngRoute'
+		]);
+
+	instanilaModule.config(['$routeProvider', function($routeProvider) {
+		$routeProvider
+	     	.when('/hashtag-groups', {
+	        	templateUrl: 'hashtag-groups.html',
+	        	controller: 'ListHashtagGroupsController'
+	    	})
+	    	.when('/hashtag-groups/new', {
+	        	templateUrl: 'hashtag-groups-new.html',
+		        controller: 'AddHashtagGroupController'
+	     	})
+	     	.otherwise({
+	        	redirectTo: '/hashtag-groups'
+	      	});
+	}]);
 
 	instanilaModule.factory('hashtagGroupsService', [function(){
 		 var hashtagGroups = [
@@ -34,13 +51,13 @@
 	 	};
 	}]);
 
-	instanilaModule.controller('AddHashtagGroupController', ['$scope', 'hashtagGroupsService', function($scope, hashtagGroupsService) {
+	instanilaModule.controller('AddHashtagGroupController', ['$scope', '$location', 'hashtagGroupsService', function($scope, $location, hashtagGroupsService) {
 		$scope.newHashtagGroup = {name: '', hashtags: ''};
 
 	 	$scope.addHashtagGroup = function() {
 	 		if($scope.addHashtagGroupForm.$valid) {
 		 		hashtagGroupsService.addNew($scope.newHashtagGroup);
-		 		$scope.newHashtagGroup = {name: '', hashtags: ''};
+		 		$location.path('/hashtag-groups');
 	 		} else {
 	 			window.alert('Name and Hashtags are required fields');
 	 		}

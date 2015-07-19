@@ -1,0 +1,12 @@
+<h2>
+	List of hashtag groups
+</h2>
+<ul>
+<li ng-repeat="hashtagGroup in hashtagGroups">
+  {{hashtagGroup.name}}: {{hashtagGroup.hashtags}}
+  <button type="button" ng-click="deleteHashtagGroup(hashtagGroup)">
+      Delete
+  </button>
+</li>
+</ul>
+<a href="#/hashtag-groups/new">Add new</a>
