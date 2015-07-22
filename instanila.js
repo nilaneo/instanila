@@ -8,16 +8,16 @@
 	instanilaModule.config(['$routeProvider', function($routeProvider) {
 		$routeProvider
 	     	.when('/hashtag-groups', {
-	        	templateUrl: 'hashtag-groups.html',
-	        	controller: 'ListHashtagGroupsController'
+	        	templateUrl: 'hashtag-groups-list.html',
+	        	controller: 'HashtagGroupsListController'
 	    	})
 	    	.when('/hashtag-groups/new', {
-	        	templateUrl: 'hashtag-groups-new.html',
-		        controller: 'AddHashtagGroupController'
+	        	templateUrl: 'hashtag-groups-manage.html',
+		        controller: 'HashtagGroupsManageController'
 	     	})
 	    	.when('/hashtag-groups/:id', {
-	        	templateUrl: 'hashtag-groups-edit.html',
-		        controller: 'EditHashtagGroupController'
+	        	templateUrl: 'hashtag-groups-manage.html',
+		        controller: 'HashtagGroupsManageController'
 	     	})
 	     	.otherwise({
 	        	redirectTo: '/hashtag-groups'
@@ -30,69 +30,94 @@
 			{id: '2', name: 'vsco', hashtags: '#vsco #vscocam #vscoism #vscobest #vscoart #vscodaily'},
 			{id: '3', name: 'travel', hashtags: '#travel #vscotravel #instatravel #doyoutravel #traveltheworld #travelmore'}
 		];
-		return {
-			get: function (id) {
-				return angular.copy(_.findWhere(hashtagGroups, {id: id}));
-			},
-			getAll: function() {
-				return hashtagGroups;
-			},
-			addNew: function(hashtagGroup) {
-				var hashtagGroupWithMaxId = _.max(hashtagGroups, function (currentHashtagGroup) {
-					return parseInt(currentHashtagGroup.id, 10);
-				});
-				hashtagGroup.id = (parseInt(hashtagGroupWithMaxId.id, 10) + 1).toString();
-				hashtagGroups.push(hashtagGroup);
-			},
-			update: function (hashtagGroup) {
-				var originalHashtagGroup = _.findWhere(hashtagGroups, {id: hashtagGroup.id});
-				originalHashtagGroup.name = hashtagGroup.name;
-				originalHashtagGroup.hashtags = hashtagGroup.hashtags;
-			},
-			deleteGroup: function(hashtagGroup) {
-				var index = _.findIndex(hashtagGroups, function(currentHashtagGroup) {
-					return hashtagGroup.id === currentHashtagGroup.id;
-				});
-				console.log(index);
-				if(index !== -1) {
-					hashtagGroups.splice(index, 1);
-				}
-			}
+
+		var service = {
+			getGroup: getGroup,
+			getAllGroups: getAllGroups,
+			saveGroup: saveGroup,
+			deleteGroup: deleteGroup
 		};
+
+		return service;
+
+		//////////
+
+		function getGroup(id) {
+			return angular.copy(_.findWhere(hashtagGroups, {id: id}));
+		}
+
+		function getAllGroups() {
+			return hashtagGroups;
+		}
+
+		function saveGroup(hashtagGroup) {
+			if(hashtagGroup.id) {
+				_updateGroup(hashtagGroup);
+			} else {
+				_createGroup(hashtagGroup);
+			}
+		}
+
+		function deleteGroup(hashtagGroup) {
+			var index = _.findIndex(hashtagGroups, function(currentHashtagGroup) {
+				return hashtagGroup.id === currentHashtagGroup.id;
+			});
+			
+			if(index !== -1) {
+				hashtagGroups.splice(index, 1);
+			}
+		}
+
+		function _createGroup(hashtagGroup) {
+			var hashtagGroupWithMaxId = _.max(hashtagGroups, function (currentHashtagGroup) {
+				return parseInt(currentHashtagGroup.id, 10);
+			});
+			hashtagGroup.id = (parseInt(hashtagGroupWithMaxId.id, 10) + 1).toString();
+			hashtagGroups.push(hashtagGroup);
+		}
+
+		function _updateGroup(hashtagGroup) {
+			var originalHashtagGroup = _.findWhere(hashtagGroups, {id: hashtagGroup.id});
+			originalHashtagGroup.name = hashtagGroup.name;
+			originalHashtagGroup.hashtags = hashtagGroup.hashtags;
+		}
 	}]);
 
-	instanilaModule.controller('ListHashtagGroupsController', ['$scope', 'hashtagGroupsService', function($scope, hashtagGroupsService) {	
-	 	$scope.hashtagGroups = hashtagGroupsService.getAll();
-	 	$scope.deleteHashtagGroup = function(hashtagGroup) {
+	instanilaModule.controller('HashtagGroupsListController', ['$scope', 'hashtagGroupsService', function($scope, hashtagGroupsService) {	
+	 	$scope.hashtagGroups = hashtagGroupsService.getAllGroups();
+	 	$scope.deleteHashtagGroup = deleteHashtagGroup;
+
+	 	//////////
+
+	 	function deleteHashtagGroup(hashtagGroup) {
 	 		if (window.confirm('Do you really want to delete this hashtag group?')) {
 	 			hashtagGroupsService.deleteGroup(hashtagGroup);
 	 		}
 	 	};
+
 	}]);
 
-	instanilaModule.controller('AddHashtagGroupController', ['$scope', '$location', 'hashtagGroupsService', function($scope, $location, hashtagGroupsService) {
-		$scope.newHashtagGroup = {name: '', hashtags: ''};
+	instanilaModule.controller('HashtagGroupsManageController', ['$scope', '$location', '$routeParams', 'hashtagGroupsService', function($scope, $location, $routeParams, hashtagGroupsService) {
+		$scope.hashtagGroup = _getHashtagGroup();
+	 	$scope.onHashtagGroupFormSubmit = onHashtagGroupFormSubmit;
 
-	 	$scope.addHashtagGroup = function() {
-	 		if($scope.addHashtagGroupForm.$valid) {
-		 		hashtagGroupsService.addNew($scope.newHashtagGroup);
+	 	//////////
+
+	 	function onHashtagGroupFormSubmit() {
+	 		if($scope.hashtagGroupForm.$valid) {
+		 		hashtagGroupsService.saveGroup($scope.hashtagGroup);
 		 		$location.path('/hashtag-groups');
 	 		} else {
 	 			window.alert('Name and Hashtags are required fields');
 	 		}
-	 	};
-	}]);
+	 	}
 
-	instanilaModule.controller('EditHashtagGroupController', ['$scope', '$location', '$routeParams', 'hashtagGroupsService', function($scope, $location, $routeParams, hashtagGroupsService) {
-		$scope.hashtagGroup = hashtagGroupsService.get($routeParams.id);
-
-	 	$scope.saveHashtagGroup = function() {
-	 		if($scope.editHashtagGroupForm.$valid) {
-		 		hashtagGroupsService.update($scope.hashtagGroup);
-		 		$location.path('/hashtag-groups');
+	 	function _getHashtagGroup () {
+	 		if($routeParams.id) {
+		 		return hashtagGroupsService.getGroup($routeParams.id);
 	 		} else {
-	 			window.alert('Name and Hashtags are required fields');
+		 		return {name: '', hashtags: ''};
 	 		}
-	 	};
+	 	}
 	}]);
 })();
