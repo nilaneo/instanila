@@ -1,7 +1,12 @@
 (function() {
     'use strict';
 
-    angular.module('instanila').config(['$routeProvider', function($routeProvider) {
+    var module = angular.module('instanila.components.hashtagGroupsList', [
+        'ngRoute',
+        'instanila.common.hashtagGroupsService'
+    ]);
+
+    module.config(['$routeProvider', function($routeProvider) {
         $routeProvider
             .when('/hashtag-groups', {
                 templateUrl: 'components/hashtag-groups-list/hashtag-groups-list.html',
@@ -9,9 +14,7 @@
             });
     }]);
 
-
-
-    angular.module('instanila').controller('HashtagGroupsListController', ['$scope', 'hashtagGroupsService', function($scope, hashtagGroupsService) {
+    module.controller('HashtagGroupsListController', ['$scope', 'hashtagGroupsService', function($scope, hashtagGroupsService) {
         $scope.hashtagGroups = hashtagGroupsService.getAllGroups();
         $scope.deleteHashtagGroup = deleteHashtagGroup;
 

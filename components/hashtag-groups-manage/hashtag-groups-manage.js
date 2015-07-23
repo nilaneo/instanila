@@ -1,7 +1,12 @@
 (function() {
     'use strict';
 
-    angular.module('instanila').config(['$routeProvider', function($routeProvider) {
+    var module = angular.module('instanila.components.hashtagGroupsManage', [
+        'ngRoute',
+        'instanila.common.hashtagGroupsService'
+    ]);
+
+    module.config(['$routeProvider', function($routeProvider) {
         $routeProvider
             .when('/hashtag-groups/new', {
                 templateUrl: 'components/hashtag-groups-manage/hashtag-groups-manage.html',
@@ -13,7 +18,7 @@
             });
     }]);
 
-    angular.module('instanila').controller('HashtagGroupsManageController', ['$scope', '$location', '$routeParams', 'hashtagGroupsService', function($scope, $location, $routeParams, hashtagGroupsService) {
+    module.controller('HashtagGroupsManageController', ['$scope', '$location', '$routeParams', 'hashtagGroupsService', function($scope, $location, $routeParams, hashtagGroupsService) {
         $scope.hashtagGroup = _getHashtagGroup();
         $scope.onHashtagGroupFormSubmit = onHashtagGroupFormSubmit;
 

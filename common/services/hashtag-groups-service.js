@@ -1,7 +1,9 @@
 (function() {
     'use strict';
 
-    angular.module('instanila').factory('hashtagGroupsService', [function(){
+    var module = angular.module('instanila.common.hashtagGroupsService', []);
+
+    module.factory('hashtagGroupsService', [function(){
          var hashtagGroups = [
             {id: '1', name: 'food', hashtags: '#food #instafood #vscofood #tastyfood #eco #organic #exclusive'},
             {id: '2', name: 'vsco', hashtags: '#vsco #vscocam #vscoism #vscobest #vscoart #vscodaily'},
