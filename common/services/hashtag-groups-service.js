@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var module = angular.module('instanila.common.hashtagGroupsService', ['ngStorage']);
+    var module = angular.module('instanila.common.hashtagGroupsService', []);
 
     module.factory('hashtagGroupsService', [function(){
 
