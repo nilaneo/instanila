@@ -1,11 +1,13 @@
 (function() {
     'use strict';
 
-    var module = angular.module('instanila.common.hashtagGroupsService', []);
+    var module = angular.module('instanila.common.hashtagGroupsService', [
+        'instanila.common.collectionsStorageService'
+    ]);
 
-    module.factory('hashtagGroupsService', [function(){
+    module.factory('hashtagGroupsService', ['collectionsStorageService', function(collectionsStorageService){
 
-        var hashtagGroups = _getGroupsFromLocalStorage();
+        var hashtagGroups = collectionsStorageService.getCollection('hashtagGroups');
 
         var service = {
             getGroup: getGroup,
@@ -32,7 +34,6 @@
             } else {
                 _createGroup(hashtagGroup);
             }
-            _saveGroupsToLocalStorage();
         }
 
         function deleteGroup(hashtagGroup) {
@@ -42,7 +43,6 @@
 
             if(index !== -1) {
                 hashtagGroups.splice(index, 1);
-                _saveGroupsToLocalStorage();
             }
         }
 
@@ -60,12 +60,5 @@
             originalHashtagGroup.hashtags = hashtagGroup.hashtags;
         }
 
-        function _saveGroupsToLocalStorage () {
-            localStorage.setItem('hashtagGroups', angular.toJson(hashtagGroups));
-        }
-
-        function _getGroupsFromLocalStorage () {
-            return JSON.parse(localStorage.getItem('hashtagGroups')) || [];
-        }
     }]);
 })();
