@@ -1,14 +1,11 @@
 (function() {
     'use strict';
 
-    var module = angular.module('instanila.common.hashtagGroupsService', []);
+    var module = angular.module('instanila.common.hashtagGroupsService', ['ngStorage']);
 
     module.factory('hashtagGroupsService', [function(){
-         var hashtagGroups = [
-            {id: '1', name: 'food', hashtags: '#food #instafood #vscofood #tastyfood #eco #organic #exclusive'},
-            {id: '2', name: 'vsco', hashtags: '#vsco #vscocam #vscoism #vscobest #vscoart #vscodaily'},
-            {id: '3', name: 'travel', hashtags: '#travel #vscotravel #instatravel #doyoutravel #traveltheworld #travelmore'}
-        ];
+
+        var hashtagGroups = _getGroupsFromLocalStorage();
 
         var service = {
             getGroup: getGroup,
@@ -35,6 +32,7 @@
             } else {
                 _createGroup(hashtagGroup);
             }
+            _saveGroupsToLocalStorage();
         }
 
         function deleteGroup(hashtagGroup) {
@@ -44,6 +42,7 @@
 
             if(index !== -1) {
                 hashtagGroups.splice(index, 1);
+                _saveGroupsToLocalStorage();
             }
         }
 
@@ -59,6 +58,14 @@
             var originalHashtagGroup = _.findWhere(hashtagGroups, {id: hashtagGroup.id});
             originalHashtagGroup.name = hashtagGroup.name;
             originalHashtagGroup.hashtags = hashtagGroup.hashtags;
+        }
+
+        function _saveGroupsToLocalStorage () {
+            localStorage.setItem('hashtagGroups', angular.toJson(hashtagGroups));
+        }
+
+        function _getGroupsFromLocalStorage () {
+            return JSON.parse(localStorage.getItem('hashtagGroups')) || [];
         }
     }]);
 })();
