@@ -16,7 +16,7 @@
       <textarea type="text" id="hashtag-group-list" name="hashtagGroupList" ng-model="hashtagGroup.hashtags" required></textarea>
   </div>
   <div>
-      <a href="#/hashtag-groups">Cancel</a>
+      <a ui-sref="hashtag-groups">Cancel</a>
       <button type="submit">
         <span ng-if="hashtagGroup.id">Save</span>
         <span ng-if="!hashtagGroup.id">Add</span>

@@ -2,23 +2,23 @@
     'use strict';
 
     var module = angular.module('instanila.components.hashtagGroupsManage', [
-        'ngRoute',
+        'ui.router',
         'instanila.common.hashtagGroupsService'
     ]);
 
-    module.config(['$routeProvider', function($routeProvider) {
-        $routeProvider
-            .when('/hashtag-groups/new', {
+    module.config(['$stateProvider', function($stateProvider) {
+        $stateProvider
+            .state('hashtag-groups-new', {
                 templateUrl: 'components/hashtag-groups-manage/hashtag-groups-manage.html',
                 controller: 'HashtagGroupsManageController'
             })
-            .when('/hashtag-groups/:id', {
+            .state('hashtag-groups-edit', {
                 templateUrl: 'components/hashtag-groups-manage/hashtag-groups-manage.html',
                 controller: 'HashtagGroupsManageController'
             });
     }]);
 
-    module.controller('HashtagGroupsManageController', ['$scope', '$location', '$routeParams', 'hashtagGroupsService', function($scope, $location, $routeParams, hashtagGroupsService) {
+    module.controller('HashtagGroupsManageController', ['$scope', '$state', '$stateParams', 'hashtagGroupsService', function($scope, $state, $stateParams, hashtagGroupsService) {
         $scope.hashtagGroup = _getHashtagGroup();
         $scope.onHashtagGroupFormSubmit = onHashtagGroupFormSubmit;
 
@@ -27,15 +27,15 @@
         function onHashtagGroupFormSubmit() {
             if($scope.hashtagGroupForm.$valid) {
                 hashtagGroupsService.saveGroup($scope.hashtagGroup);
-                $location.path('/hashtag-groups');
+                $state.go('hashtag-groups');
             } else {
                 window.alert('Name and Hashtags are required fields');
             }
         }
 
         function _getHashtagGroup () {
-            if($routeParams.id) {
-                return hashtagGroupsService.getGroup($routeParams.id);
+            if($stateParams.id) {
+                return hashtagGroupsService.getGroup($stateParams.id);
             } else {
                 return {name: '', hashtags: ''};
             }

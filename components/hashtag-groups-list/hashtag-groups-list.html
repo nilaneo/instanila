@@ -7,7 +7,7 @@
   <button type="button" ng-click="deleteHashtagGroup(hashtagGroup)">
       Delete
   </button>
-  <a href="#/hashtag-groups/{{hashtagGroup.id}}">Edit</a>
+  <a ui-sref="hashtag-groups-edit({ id: hashtagGroup.id })">Edit</a>
 </li>
 </ul>
-<a href="#/hashtag-groups/new">Add new</a>
+<a ui-sref="hashtag-groups-new">Add new</a>

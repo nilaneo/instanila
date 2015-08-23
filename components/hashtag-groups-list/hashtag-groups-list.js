@@ -2,13 +2,13 @@
     'use strict';
 
     var module = angular.module('instanila.components.hashtagGroupsList', [
-        'ngRoute',
+        'ui.router',
         'instanila.common.hashtagGroupsService'
     ]);
 
-    module.config(['$routeProvider', function($routeProvider) {
-        $routeProvider
-            .when('/hashtag-groups', {
+    module.config(['$stateProvider', function($stateProvider) {
+        $stateProvider
+            .state('hashtag-groups', {
                 templateUrl: 'components/hashtag-groups-list/hashtag-groups-list.html',
                 controller: 'HashtagGroupsListController'
             });
