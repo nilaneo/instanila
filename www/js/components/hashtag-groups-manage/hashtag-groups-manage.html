@@ -1,0 +1,25 @@
+<ion-view view-title="{{ vm.hashtagGroup.id ? 'Edit' : 'New' }} hashtags">
+  <ion-content>
+    <form ng-submit="vm.onHashtagGroupFormSubmit()" name="vm.hashtagGroupForm" novalidate>
+      <div>
+        <label for="hashtag-group-name">Name</label>
+      </div>
+      <div>
+        <input type="text" id="hashtag-group-name" name="hashtagGroupName" ng-model="vm.hashtagGroup.name" required>
+      </div>
+      <div>
+        <label for="hashtag-group-list">Hashtags</label>
+      </div>
+      <div>
+        <textarea type="text" id="hashtag-group-list" name="hashtagGroupList" ng-model="vm.hashtagGroup.hashtags" required></textarea>
+      </div>
+      <div>
+        <a ui-sref="hashtag-groups">Cancel</a>
+        <button type="submit">
+          <span ng-if="vm.hashtagGroup.id">Save</span>
+          <span ng-if="!vm.hashtagGroup.id">Add</span>
+        </button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

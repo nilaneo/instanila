@@ -1,0 +1,14 @@
+<ion-view view-title="Instanila">
+  <ion-content>
+    <ul>
+      <li ng-repeat="hashtagGroup in vm.hashtagGroups">
+        {{hashtagGroup.name}}: {{hashtagGroup.hashtags}}
+        <button type="button" ng-click="vm.deleteHashtagGroup(hashtagGroup)">
+          Delete
+        </button>
+        <a ui-sref="hashtag-groups-edit({ id: hashtagGroup.id })">Edit</a>
+      </li>
+    </ul>
+    <a ui-sref="hashtag-groups-new">Add new</a>
+  </ion-content>
+</ion-view>
