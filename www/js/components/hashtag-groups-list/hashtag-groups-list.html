@@ -7,6 +7,7 @@
           Delete
         </button>
         <a ui-sref="hashtag-groups-edit({ id: hashtagGroup.id })">Edit</a>
+        <button type="button" ng-click="vm.copy(hashtagGroup.hashtags)">Copy</button>
       </li>
     </ul>
     <a ui-sref="hashtag-groups-new">Add new</a>
