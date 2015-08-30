@@ -5,8 +5,11 @@
             'firebase'
         ]);
 
-    module.factory('hashtagGroupsService', ['$firebaseArray', function($firebaseArray){
-        var hashtagGroupsRef = new Firebase("https://instanila.firebaseio.com/hashtagGroups");
+    module.factory('hashtagGroupsService', ['$firebaseArray', '$firebaseAuth', function($firebaseArray, $firebaseAuth){
+        var ref = new Firebase("https://instanila.firebaseio.com");
+        var authObj = $firebaseAuth(ref);
+        var uid = authObj.$getAuth().uid;
+        var hashtagGroupsRef = new Firebase("https://instanila.firebaseio.com/hashtagGroups/" + uid);
         var hashtagGroups = $firebaseArray(hashtagGroupsRef);
 
         var service = {

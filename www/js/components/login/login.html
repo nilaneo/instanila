@@ -1,0 +1,22 @@
+<ion-view view-title="Login">
+  <ion-content>
+    <form ng-submit="vm.onLoginFormSubmit()" name="vm.loginForm" novalidate>
+      <div>
+        <label for="user-email">Email</label>
+      </div>
+      <div>
+        <input type="email" id="user-email" name="userEmail" ng-model="vm.userEmail" required/>
+      </div>
+      <div>
+        <label for="user-password">Password</label>
+      </div>
+      <div>
+        <input type="password" id="user-password" name="userPassword" ng-model="vm.userPassword" required/>
+      </div>
+      <div>
+        <button type="submit">Login</button>
+        <a ui-sref="registration">Registration</a>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

@@ -3,12 +3,14 @@
 
     var module = angular.module('instanila', [
         'ionic',
+        'instanila.components.login',
+        'instanila.components.registration',
         'instanila.components.hashtagGroupsList',
         'instanila.components.hashtagGroupsManage'
     ]);
 
     module.run(['$state', function($state) {
-        $state.go('hashtag-groups');
+        $state.go('login');
     }]);
 
     module.run(['$ionicPlatform', function($ionicPlatform) {
