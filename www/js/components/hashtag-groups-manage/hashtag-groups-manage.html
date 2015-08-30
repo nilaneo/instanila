@@ -1,4 +1,4 @@
-<ion-view view-title="{{ vm.hashtagGroup.id ? 'Edit' : 'New' }} hashtags">
+<ion-view view-title="{{ vm.hashtagGroup.$id ? 'Edit' : 'New' }} hashtags">
   <ion-content>
     <form ng-submit="vm.onHashtagGroupFormSubmit()" name="vm.hashtagGroupForm" novalidate>
       <div>
@@ -16,8 +16,8 @@
       <div>
         <a ui-sref="hashtag-groups">Cancel</a>
         <button type="submit">
-          <span ng-if="vm.hashtagGroup.id">Save</span>
-          <span ng-if="!vm.hashtagGroup.id">Add</span>
+          <span ng-if="vm.hashtagGroup.$id">Save</span>
+          <span ng-if="!vm.hashtagGroup.$id">Add</span>
         </button>
       </div>
     </form>

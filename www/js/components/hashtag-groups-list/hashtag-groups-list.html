@@ -6,7 +6,7 @@
         <button type="button" ng-click="vm.deleteHashtagGroup(hashtagGroup)">
           Delete
         </button>
-        <a ui-sref="hashtag-groups-edit({ id: hashtagGroup.id })">Edit</a>
+        <a ui-sref="hashtag-groups-edit({ id: hashtagGroup.$id })">Edit</a>
         <button type="button" ng-click="vm.copy(hashtagGroup.hashtags)">Copy</button>
       </li>
     </ul>
