@@ -3,14 +3,23 @@
 
     var module = angular.module('instanila', [
         'ionic',
+        'instanila.common.directives.logout-button',
         'instanila.components.login',
         'instanila.components.registration',
         'instanila.components.hashtagGroupsList',
         'instanila.components.hashtagGroupsManage'
     ]);
 
-    module.run(['$state', function($state) {
-        $state.go('login');
+    module.run(['$state', '$firebaseAuth', function($state, $firebaseAuth) {
+        var ref = new Firebase("https://instanila.firebaseio.com");
+        var authObj = $firebaseAuth(ref);
+
+        if (!!authObj.$getAuth()) {
+            $state.go('hashtag-groups');
+        } else {
+            $state.go('login');
+        }
+
     }]);
 
     module.run(['$ionicPlatform', function($ionicPlatform) {
