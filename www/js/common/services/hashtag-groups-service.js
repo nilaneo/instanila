@@ -6,11 +6,7 @@
         ]);
 
     module.factory('hashtagGroupsService', ['$firebaseArray', '$firebaseAuth', function($firebaseArray, $firebaseAuth){
-        var ref = new Firebase("https://instanila.firebaseio.com");
-        var authObj = $firebaseAuth(ref);
-        var uid = authObj.$getAuth().uid;
-        var hashtagGroupsRef = new Firebase("https://instanila.firebaseio.com/hashtagGroups/" + uid);
-        var hashtagGroups = $firebaseArray(hashtagGroupsRef);
+        var hashtagGroups;
 
         var service = {
             getGroup: getGroup,
@@ -19,9 +15,27 @@
             deleteGroup: deleteGroup
         };
 
+        activate();
+
         return service;
 
         //////////
+
+        function activate () {
+            var ref = new Firebase("https://instanila.firebaseio.com");
+            var authObj = $firebaseAuth(ref);
+
+            initHashtagGroupsArray(authObj.$getAuth().uid);
+
+            authObj.$onAuth(function(authData){
+                if(authData) {
+                    initHashtagGroupsArray(authData.uid);
+                } else if (hashtagGroups){
+                    hashtagGroups.$destroy();
+                    hashtagGroups = null;
+                }
+            });
+        }
 
         function getGroup(id) {
             return hashtagGroups.$getRecord(id);
@@ -41,6 +55,11 @@
 
         function deleteGroup(hashtagGroup) {
             hashtagGroups.$remove(hashtagGroup);
+        }
+
+        function initHashtagGroupsArray(uid) {
+            var hashtagGroupsRef = new Firebase('https://instanila.firebaseio.com/hashtagGroups/' + uid);
+            hashtagGroups = $firebaseArray(hashtagGroupsRef);
         }
 
     }]);
