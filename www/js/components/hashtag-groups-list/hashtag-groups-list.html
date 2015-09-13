@@ -8,6 +8,15 @@
         </button>
       </li>
     </ul>
+
+    <div class="padding notice" ng-if="vm.loading">
+      <i class="icon ion-load-c"></i> Loading...
+    </div>
+
+    <div class="padding notice" ng-if="!vm.loading && !vm.hashtagGroups.length">
+      You haven't added any hashtag groups yet.<br>
+      Let's do it now :)
+    </div>
     <div class="padding">
       <a ui-sref="hashtag-groups-new" class="button button-block button-royal button-outline">Add new</a>
     </div>

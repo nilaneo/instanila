@@ -17,11 +17,22 @@
     module.controller('HashtagGroupsListController', ['$ionicPlatform', '$state', 'hashtagGroupsService', function($ionicPlatform, $state, hashtagGroupsService) {
         var vm = this;
 
-        vm.hashtagGroups = hashtagGroupsService.getAllGroups();
+        vm.hashtagGroups = null;
+        vm.loading = true;
         vm.copy = copy;
         vm.edit = edit;
 
+        activate();
+
         //////////
+
+        function activate () {
+            vm.hashtagGroups = hashtagGroupsService.getAllGroups();
+
+            vm.hashtagGroups.$loaded(function() {
+                vm.loading = false;
+            });
+        }
 
         function copy($event, hashtags) {
             $event.stopPropagation();
