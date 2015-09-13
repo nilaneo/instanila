@@ -3,10 +3,10 @@
     <form ng-submit="vm.onLoginFormSubmit()" name="vm.loginForm" novalidate>
       <div class="list">
         <label class="item item-input">
-          <input type="email" id="user-email" name="userEmail" ng-model="vm.userEmail" placeholder="Email" required/>
+          <input type="email" name="userEmail" ng-model="vm.userEmail" placeholder="Email" required/>
         </label>
         <label class="item item-input">
-          <input type="password" id="user-password" name="userPassword" ng-model="vm.userPassword" placeholder="Password" required/>
+          <input type="password" name="userPassword" ng-model="vm.userPassword" placeholder="Password" required/>
         </label>
       </div>
       <button type="submit" class="button button-calm button-block">Login</button>

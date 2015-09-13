@@ -3,7 +3,7 @@
     <ul class="list">
       <li ng-repeat="hashtagGroup in vm.hashtagGroups" class="item item-button-right" ng-click="vm.edit(hashtagGroup)">
         {{hashtagGroup.name}}
-        <button type="button" class="button button-royal button-outline" ng-click="vm.copy($event, hashtagGroup.hashtags)">
+        <button type="button" class="button button-royal button-outline button-large" ng-click="vm.copy($event, hashtagGroup.hashtags)">
           <i class="icon ion-ios-copy-outline"></i>
         </button>
       </li>

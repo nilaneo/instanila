@@ -1,24 +1,21 @@
 <ion-view view-title="{{ vm.hashtagGroup.$id ? 'Edit' : 'New' }} hashtags">
   <ion-content>
     <form ng-submit="vm.onHashtagGroupFormSubmit()" name="vm.hashtagGroupForm" novalidate>
-      <div>
-        <label for="hashtag-group-name">Name</label>
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" name="hashtagGroupName" ng-model="vm.hashtagGroup.name" placeholder="Name" required>
+        </label>
+        <label class="item item-input">
+          <textarea type="text" rows="6" name="hashtagGroupList" ng-model="vm.hashtagGroup.hashtags" placeholder="Hashtags" required></textarea>
+        </label>
       </div>
-      <div>
-        <input type="text" id="hashtag-group-name" name="hashtagGroupName" ng-model="vm.hashtagGroup.name" required>
-      </div>
-      <div>
-        <label for="hashtag-group-list">Hashtags</label>
-      </div>
-      <div>
-        <textarea type="text" id="hashtag-group-list" name="hashtagGroupList" ng-model="vm.hashtagGroup.hashtags" required></textarea>
-      </div>
-      <div>
-        <button type="submit">
-          <span ng-if="vm.hashtagGroup.$id">Save</span>
-          <span ng-if="!vm.hashtagGroup.$id">Add</span>
-        </button>
-        <button type="button" ng-if="vm.hashtagGroup.$id" ng-click="vm.deleteHashtagGroup()">Delete</button>
+      <div class="padding row">
+        <div class="col" ng-if="vm.hashtagGroup.$id">
+          <button type="button" class="button button-block button-assertive button-outline"  ng-click="vm.deleteHashtagGroup()">Delete</button>
+        </div>
+        <div class="col">
+          <button type="submit" class="button button-block button-royal button-outline">Save</button>
+        </div>
       </div>
     </form>
   </ion-content>
