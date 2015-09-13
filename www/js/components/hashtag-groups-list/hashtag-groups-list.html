@@ -1,15 +1,15 @@
 <ion-view view-title="Instanila">
   <ion-content>
-    <ul>
-      <li ng-repeat="hashtagGroup in vm.hashtagGroups">
-        {{hashtagGroup.name}}: {{hashtagGroup.hashtags}}
-        <button type="button" ng-click="vm.deleteHashtagGroup(hashtagGroup)">
-          Delete
+    <ul class="list">
+      <li ng-repeat="hashtagGroup in vm.hashtagGroups" class="item item-button-right" ng-click="vm.edit(hashtagGroup)">
+        {{hashtagGroup.name}}
+        <button type="button" class="button button-royal button-outline" ng-click="vm.copy($event, hashtagGroup.hashtags)">
+          <i class="icon ion-ios-copy-outline"></i>
         </button>
-        <a ui-sref="hashtag-groups-edit({ id: hashtagGroup.$id })">Edit</a>
-        <button type="button" ng-click="vm.copy(hashtagGroup.hashtags)">Copy</button>
       </li>
     </ul>
-    <a ui-sref="hashtag-groups-new">Add new</a>
+    <div class="padding">
+      <a ui-sref="hashtag-groups-new" class="button button-block button-royal button-outline">Add new</a>
+    </div>
   </ion-content>
 </ion-view>

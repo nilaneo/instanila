@@ -14,11 +14,11 @@
         <textarea type="text" id="hashtag-group-list" name="hashtagGroupList" ng-model="vm.hashtagGroup.hashtags" required></textarea>
       </div>
       <div>
-        <a ui-sref="hashtag-groups">Cancel</a>
         <button type="submit">
           <span ng-if="vm.hashtagGroup.$id">Save</span>
           <span ng-if="!vm.hashtagGroup.$id">Add</span>
         </button>
+        <button type="button" ng-if="vm.hashtagGroup.$id" ng-click="vm.deleteHashtagGroup()">Delete</button>
       </div>
     </form>
   </ion-content>

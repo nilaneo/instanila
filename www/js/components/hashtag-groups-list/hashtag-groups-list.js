@@ -14,28 +14,29 @@
             });
     }]);
 
-    module.controller('HashtagGroupsListController', ['$ionicPlatform', 'hashtagGroupsService', function($ionicPlatform, hashtagGroupsService) {
+    module.controller('HashtagGroupsListController', ['$ionicPlatform', '$state', 'hashtagGroupsService', function($ionicPlatform, $state, hashtagGroupsService) {
         var vm = this;
 
         vm.hashtagGroups = hashtagGroupsService.getAllGroups();
-        vm.deleteHashtagGroup = deleteHashtagGroup;
         vm.copy = copy;
+        vm.edit = edit;
 
         //////////
 
-        function deleteHashtagGroup(hashtagGroup) {
-            if (window.confirm('Do you really want to delete this hashtag group?')) {
-                hashtagGroupsService.deleteGroup(hashtagGroup);
-            }
-        };
-
-        function copy(hashtags) {
+        function copy($event, hashtags) {
+            $event.stopPropagation();
             $ionicPlatform.ready(function() {
                 if(window.cordova && window.cordova.plugins.clipboard) {
                     cordova.plugins.clipboard.copy(hashtags);
                 }
             });
-        };
+        }
+
+        function edit (hashtagGroup) {
+            $state.go('hashtag-groups-edit', {
+                id: hashtagGroup.$id
+            });
+        }
 
     }]);
 }());

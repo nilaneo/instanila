@@ -25,6 +25,7 @@
         var vm = this;
 
         vm.hashtagGroup = _getHashtagGroup();
+        vm.deleteHashtagGroup = deleteHashtagGroup;
         vm.onHashtagGroupFormSubmit = onHashtagGroupFormSubmit;
 
         //////////
@@ -37,6 +38,12 @@
                 window.alert('Name and Hashtags are required fields');
             }
         }
+
+        function deleteHashtagGroup() {
+            if (window.confirm('Do you really want to delete this hashtag group?')) {
+                hashtagGroupsService.deleteGroup(vm.hashtagGroup);
+            }
+        };
 
         function _getHashtagGroup () {
             if($stateParams.id) {
