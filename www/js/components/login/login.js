@@ -31,14 +31,15 @@
         }
 
         function _loginUser (email, password) {
-            var ref = new Firebase("https://instanila.firebaseio.com");
+            var ref = new Firebase('https://instanila.firebaseio.com');
             ref.authWithPassword({
                 email: email,
                 password: password
             }, function(error, authData) {
                 if (error) {
-                    window.alert("Login Failed!", error);
+                    window.alert('Login Failed!', error);
                 } else {
+                    window.alert('Your account has been created. Let\'s login!');
                     $state.go('hashtag-groups');
                 }
             });

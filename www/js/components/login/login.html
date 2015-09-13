@@ -1,5 +1,5 @@
 <ion-view view-title="Instanila" cache-view="false" hide-back-button="true">
-  <ion-content class="padding">
+  <ion-content>
     <form ng-submit="vm.onLoginFormSubmit()" name="vm.loginForm" novalidate>
       <div class="list">
         <label class="item item-input">
@@ -9,9 +9,11 @@
           <input type="password" name="userPassword" ng-model="vm.userPassword" placeholder="Password" required/>
         </label>
       </div>
-      <button type="submit" class="button button-calm button-block">Login</button>
-      <div class="separator">or</div>
-      <a ui-sref="registration" class="button button-royal button-outline button-block">Sign up</a>
+      <div class="padding">
+        <button type="submit" class="button button-calm button-block">Login</button>
+        <div class="separator">or</div>
+        <a ui-sref="registration" class="button button-royal button-outline button-block">Sign up</a>
+      </div>
     </form>
   </ion-content>
 </ion-view>

@@ -20,8 +20,6 @@
         vm.userPassword = null;
         vm.onRegistrationFormSubmit = onRegistrationFormSubmit;
 
-
-
         //////////
 
         function onRegistrationFormSubmit() {
@@ -33,15 +31,15 @@
         }
 
         function _createUser (email, password) {
-            var ref = new Firebase("https://instanila.firebaseio.com");
+            var ref = new Firebase('https://instanila.firebaseio.com');
             ref.createUser({
               email: email,
               password: password
             }, function(error, userData) {
               if (error) {
-                window.alert("Error creating user:", error);
+                window.alert('Error creating user:', error);
               } else {
-                $state.go('hashtag-groups');
+                $state.go('login');
               }
             });
         }

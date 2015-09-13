@@ -1,21 +1,16 @@
 <ion-view view-title="Registration">
   <ion-content>
     <form ng-submit="vm.onRegistrationFormSubmit()" name="vm.registrationForm" novalidate>
-      <div>
-        <label for="user-email">Email</label>
+      <div class="list">
+        <label class="item item-input">
+          <input type="email" name="userEmail" ng-model="vm.userEmail" placeholder="Email" required/>
+        </label>
+        <label class="item item-input">
+          <input type="password" name="userPassword" ng-model="vm.userPassword" placeholder="Password" required/>
+        </label>
       </div>
-      <div>
-        <input type="email" id="user-email" name="userEmail" ng-model="vm.userEmail" required/>
-      </div>
-      <div>
-        <label for="user-password">Password</label>
-      </div>
-      <div>
-        <input type="password" id="user-password" name="userPassword" ng-model="vm.userPassword" required/>
-      </div>
-      <div>
-        <button type="submit">Registration</button>
-        <a ui-sref="login">Login</a>
+      <div class="padding">
+        <button type="submit" class="button button-royal button-outline button-block">Sign up</button>
       </div>
     </form>
   </ion-content>
