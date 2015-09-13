@@ -42,6 +42,7 @@
         function deleteHashtagGroup() {
             if (window.confirm('Do you really want to delete this hashtag group?')) {
                 hashtagGroupsService.deleteGroup(vm.hashtagGroup);
+                $state.go('hashtag-groups');
             }
         };
 
