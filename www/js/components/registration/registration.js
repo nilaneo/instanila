@@ -24,7 +24,12 @@
 
         function onRegistrationFormSubmit() {
             if(vm.registrationForm.$valid) {
-                _createUser(vm.userEmail, vm.userPassword);
+                if(vm.userPassword === vm.userPasswordConfirm) {
+                    _createUser(vm.userEmail, vm.userPassword);
+                }
+                else {
+                    window.alert('Passwords should match');
+                }
             } else {
                 window.alert('Email and password are required');
             }
