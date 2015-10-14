@@ -39,7 +39,6 @@
                 if (error) {
                     window.alert('Login Failed!', error);
                 } else {
-                    window.alert('Your account has been created. Let\'s login!');
                     $state.go('hashtag-groups');
                 }
             });
